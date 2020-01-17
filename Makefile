@@ -25,7 +25,7 @@ test_all: debug
 # Remove all build outputs and intermediate files.
 clean:
 	@ rm -rf $(BUILD_DIR)
-	@ rm clox
+	@ rm -rf clox
 
 # Compile the C interpreter.
 clox:
