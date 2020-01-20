@@ -4,7 +4,6 @@
 #include "object.h"
 #include "vm.h"
 
-static void advance();
 ObjFunction* compile(const char* source);
 
 #endif
