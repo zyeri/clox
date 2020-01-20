@@ -5,6 +5,6 @@
 #include "vm.h"
 
 static void advance();
-bool compile(const char* source, Chunk* chunk);
+ObjFunction* compile(const char* source);
 
 #endif
