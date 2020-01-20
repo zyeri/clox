@@ -2,7 +2,6 @@
 #define clox_memory_h
 
 #include "object.h"
-#include "vm.h"
 
 #define ALLOCATE(type, count) \
     (type*)reallocate(NULL, 0, sizeof(type) * (count))
@@ -17,7 +16,7 @@
     (type*)reallocate(previous, sizeof(type) * (oldCount), \
         sizeof(type) * (count))
 
-#define FREE_ARRAY(type, pointer, oldCount)     \
+#define FREE_ARRAY(type, pointer, oldCount) \
     reallocate(pointer, sizeof(type) * (oldCount), 0)
 
 void* reallocate(void* previous, size_t oldSize, size_t newSize);

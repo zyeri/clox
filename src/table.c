@@ -72,6 +72,7 @@ static void adjustCapacity(Table* table, int capacity) {
     if (entry->key == NULL) {
       continue;
     }
+
     Entry* dest = findEntry(entries, capacity, entry->key);
 
     dest->key = entry->key;
@@ -112,7 +113,7 @@ bool tableDelete(Table* table, ObjString* key) {
 
   // Find the entry.
   Entry* entry = findEntry(table->entries, table->capacity, key);
-  if(entry->key == NULL) {
+  if (entry->key == NULL) {
     return false;
   }
 
@@ -121,7 +122,6 @@ bool tableDelete(Table* table, ObjString* key) {
   entry->value = BOOL_VAL(true);
 
   return true;
-
 }
 
 void tableAddAll(Table* from, Table* to) {
@@ -148,10 +148,9 @@ ObjString* tableFindString(Table* table, const char* chars, int length, uint32_t
         // Stop if we find an empty non-tombstone entry.
         return NULL;
       }
-    }
-    else if (entry->key->length == length &&
-             entry->key->hash == hash &&
-             memcmp(entry->key->chars, chars, length) == 0) {
+    } else if (entry->key->length == length &&
+               entry->key->hash == hash &&
+               memcmp(entry->key->chars, chars, length) == 0) {
       // We found it.
       return entry->key;
     }

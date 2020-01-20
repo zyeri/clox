@@ -6,9 +6,9 @@
 #include "value.h"
 
 void initValueArray(ValueArray* array) {
-    array->values = NULL;
-    array->capacity = 0;
-    array->count = 0;
+  array->values = NULL;
+  array->capacity = 0;
+  array->count = 0;
 }
 
 void writeValueArray(ValueArray* array, Value value) {
@@ -29,7 +29,7 @@ void freeValueArray(ValueArray* array) {
 }
 
 void printValue(Value value) {
-  switch(value.type) {
+  switch (value.type) {
     case VAL_BOOL:   printf(AS_BOOL(value) ? "true" : "false"); break;
     case VAL_NIL:    printf("nil"); break;
     case VAL_NUMBER: printf("%g", AS_NUMBER(value)); break;

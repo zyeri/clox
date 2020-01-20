@@ -27,7 +27,6 @@ typedef enum {
   OP_PRINT,
   OP_JUMP,
   OP_JUMP_IF_FALSE,
-  OP_CONSTANT_LONG,
   OP_LOOP,
   OP_CALL,
   OP_RETURN,
@@ -43,9 +42,7 @@ typedef struct {
 
 void initChunk(Chunk* chunk);
 void freeChunk(Chunk* chunk);
-void writeChunk(Chunk*, uint8_t byte, int line);
-
+void writeChunk(Chunk* chunk, uint8_t byte, int line);
 int addConstant(Chunk* chunk, Value value);
-void writeConstant(Chunk* chunk, Value value, int line);
 
 #endif

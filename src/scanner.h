@@ -28,10 +28,10 @@ typedef enum {
 } TokenType;
 
 typedef struct {
-    TokenType type;
-    const char* start;
-    int length;
-    int line;
+  TokenType type;
+  const char* start;
+  int length;
+  int line;
 } Token;
 
 void initScanner(const char* source);
