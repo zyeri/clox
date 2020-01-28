@@ -27,6 +27,12 @@ static Obj* allocateObject(size_t size, ObjType type) {
   return object;
 }
 
+ObjClass* newClass(ObjString* name) {
+  ObjClass* _class = ALLOCATE_OBJ(ObjClass, OBJ_CLASS);
+  _class->name = name;
+  return _class;
+}
+
 ObjClosure* newClosure(ObjFunction* function) {
   ObjUpvalue** upvalues = ALLOCATE(ObjUpvalue*, function->upvalueCount);
 
@@ -51,6 +57,14 @@ ObjFunction* newFunction() {
   function->name = NULL;
   initChunk(&function->chunk);
   return function;
+}
+
+ObjInstance* newInstance(ObjClass* _class) {
+  ObjInstance* instance = ALLOCATE_OBJ(ObjInstance, OBJ_INSTANCE);
+  instance->_class = _class;
+  initTable(&instance->fields);
+
+  return instance;
 }
 
 ObjNative* newNative(NativeFn function) {
@@ -127,12 +141,20 @@ static void printFunction(ObjFunction* function) {
 
 void printObject(Value value) {
   switch (OBJ_TYPE(value)) {
+    case OBJ_CLASS: {
+      printf("%s", AS_CLASS(value)->name->chars);
+      break;
+    }
     case OBJ_CLOSURE: {
       printFunction(AS_CLOSURE(value)->function);
       break;
     }
     case OBJ_FUNCTION: {
       printFunction(AS_FUNCTION(value));
+      break;
+    }
+    case OBJ_INSTANCE: {
+      printf("%s instance", AS_INSTANCE(value)->_class->name->chars);
       break;
     }
     case OBJ_NATIVE: {
